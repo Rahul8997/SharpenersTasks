@@ -1,0 +1,14 @@
+1)Dom structure:-
+
+  
+
+     Element:                                                    Element:
+     <head>                                                      <body>
+        |                                                          ||
+        |                                              |-----------------------|
+     Element:                        Attribute---- Element:                Element:----------Attribute
+      <h1>                          type , name    <input>                 <input>             type ,button
+       |
+       |
+     Text:
+     Title 
