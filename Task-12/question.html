@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My booking app</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h1>Appointment Booking App</h1>
+    <form action="#">
+      <input type="text" id="name" required />
+      <input type="email" id="email" required />
+      <input type="submit" id="submit" value="Submit" />
+    </form>
+    <ul id="listOfPeople"></ul>
+    <script>
+      const submitButton = document.getElementById("submit");
+      
+      submitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        const emailId = document.getElementById("email").value;
+        const name = document.getElementById("name").value;
+        if (emailId.length > 0 && name.length > 0) {
+          const object = {
+            name: name,
+            emailId: emailId, //unique
+          };
+          localStorage.setItem("mailId:" + emailId, JSON.stringify(object));
+          addNewLineElement(object);
+        }
+      });
+
+      Object.keys(localStorage).forEach((key) => {
+        stringifiedDetailsOfPeople = localStorage.getItem(key);
+        detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
+        addNewLineElement(detailsOfPeople);
+      });
+
+      function addNewLineElement(object) {
+        var ul = document.getElementById("listOfPeople");
+        var li = document.createElement("li");
+        li.appendChild(
+          document.createTextNode(object.name + " " + object.emailId + " ")
+        );
+        ul.appendChild(li);
+      }
+    </script>
+  </body>
+</html>
