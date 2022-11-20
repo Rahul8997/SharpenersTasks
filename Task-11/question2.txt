@@ -1,0 +1,8 @@
+Q.Everytime you add a new user, the older user gets removed.
+Why does this happen any ideas. Write the reason in the answer.
+
+Ans:Because we store the userdata as an object in local storage.
+Now local storage stores the data in key:value format.
+So every time we add userdata ,we update value of the same key.
+So the old user data is replaced by new user data.So at any time 
+we able to store only one userdata.
