@@ -64,7 +64,7 @@
 
    newDiv.setAttribute('title','Hello div');
 
-   var newDivText=document.createTextNode("hello world");
+   var newDivText=document.createTextNode("HEllo");
 
    newDiv.appendChild(newDivText);
 
@@ -81,7 +81,8 @@
    newItem.appendChild(newItemText);
 
    var container1=document.querySelector("#header-title");
-   container.insertBefore(newItem);
+   var h2=document.querySelector('header h2')
+   container.insertBefore(newItem,h2);
 
     
 </SCript>
