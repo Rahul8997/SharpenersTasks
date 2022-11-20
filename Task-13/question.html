@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My booking app</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h1>Appointment Booking App</h1>
+    <form action="#">
+      <input type="text" id="name" required />
+      <input type="email" id="email" required />
+      <input type="submit" id="submit" value="Submit" />
+    </form>
+    <ul id="listOfPeople"></ul>
+    <script>
+      const submitButton = document.getElementById("submit");
+
+      submitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        const emailId = document.getElementById("email").value;
+        const name = document.getElementById("name").value;
+        if (emailId.length > 0 && name.length > 0) {
+          const object = {
+            name: name,
+            emailId: emailId, //unique
+          };
+          localStorage.setItem("mailId:" + emailId, JSON.stringify(object));
+          addNewLineElement(object);
+        }
+      });
+      Object.keys(localStorage).forEach((key) => {
+        stringifiedDetailsOfPeople = localStorage.getItem(key);
+        detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
+        
+        addNewLineElement(detailsOfPeople);
+      });
+    
+    //  console.log(arr.length)
+      function addNewLineElement(object) {
+        var ul = document.getElementById("listOfPeople");
+        var li = document.createElement("li");
+        li.appendChild(
+          document.createTextNode(object.name + " " + object.emailId + " ")
+        );
+
+        var btn=document.createElement("button");
+        btn.style.cursor="pointer"
+        btn.appendChild(document.createTextNode("DELETE"));
+        btn.setAttribute("id",`${object.emailId}`);
+        li.appendChild(btn)
+        
+        var editBtn=document.createElement("button");
+        editBtn.style.margin="5px 5px"
+        editBtn.style.cursor="pointer"
+        editBtn.appendChild(document.createTextNode("EDIT"));
+        editBtn.setAttribute("id",`${object.emailId}`);
+        li.appendChild(editBtn);
+        ul.appendChild(li);
+
+        btn.addEventListener("click",()=>{
+           console.log("clicked");
+           let par=btn.parentElement;
+           console.log(par);
+           par.style.display="none";
+           localStorage.removeItem("mailId:" + object.emailId);
+        })
+
+
+      }
+
+
+    </script>
+  </body>
+</html>
