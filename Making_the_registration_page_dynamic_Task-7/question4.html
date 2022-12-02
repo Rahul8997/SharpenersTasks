@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Convert the createPost , deletePost you wrote previously into async await completely
+        const posts = [
+  { title: "Post one", body: "This is post one", lastactivitytime: new Date() },
+  { title: "Post two", body: "This is post two", lastactivitytime: new Date() },
+];
+
+function getPost() {
+  
+  setTimeout(() => {
+    let output = "";
+    for (let i = 0; i < posts.length; i++) {
+      output += `<li> ${posts[i].title} post last updated at ${posts[i].lastactivitytime}</li>`;
+    }
+    document.body.innerHTML = output;
+  }, 500);
+}
+
+async function createPost(post) {
+  updateLastUserActivityTime(post);
+  
+ let newPost=new Promise((resolve, reject) => {
+    setTimeout(() => {
+      posts.push(post);
+        resolve();
+    }, 500);
+  });
+
+  let createdPost;
+  try {
+    createdPost=await newPost;
+  } catch (error) {
+    createdPost="Error in creating post"
+  }
+    
+return createPost;
+// console.log(createPost)
+}
+
+
+ createPost({title: "Post three",body: "This is post three",lastactivitytime: new Date()}); 
+
+
+
+async function deletePost() {
+  let deleting= new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let error = false;
+
+      if (posts.length > 0) {
+        posts.pop();
+        resolve();
+      } else {
+        reject("Array is empty now");
+      }
+    }, 2000);
+  });
+
+  let deletedPost=await deleting;
+  return deleting;
+}
+
+
+
+  deletePost().then(getPost).catch((error)=>console.log(error)).then(deletePost).then(getPost).catch((error)=>console.log(error)).then(deletePost).then(getPost).catch((error)=>console.log(error)).then(deletePost).then(getPost).catch((error)=>console.log(error));
+
+
+createPost({title: "Post four",body: "This is post four",lastactivitytime: new Date()})
+  .then(getPost)
+  .catch((error) => console.log(error));
+
+  
+
+setTimeout(() => {
+  deletePost()
+    .then(getPost)
+    .catch((error) => console.log(error));
+}, 1000);
+
+//Promise all
+const promise1 = Promise.resolve("hello world");
+const promise2 = 10;
+const promise3 = new Promise((resolve) => {
+  setTimeout(resolve, 2000, "GoodBye");
+});
+
+//   Promise.all([promise1,promise2,promise3]).then(values=>console.log(values));
+
+async function updateLastUserActivityTime(post) {
+  let updating=new Promise((resolve) => {
+    setTimeout(() => {
+      // post.lastactivitytime=new Date();
+      resolve();
+    }, 500);
+  });
+let updatedPost=await updating;
+return updatedPost;
+}
+
+Promise.all([createPost(), updateLastUserActivityTime()]).then(
+  posts.forEach((element) => {
+    console.log(element);
+  })
+);
+
+
+
+// In the code above, the code is written in a synchronous way and there is no chaining, as was the case with callbacks and promises. The await Promise.all line blocks the code execution until all files are read. Afterwards, the code that was previously inside the callback is now part of the count_ts function itself in lines 12 to 22.
+
+// Async functions not only allow the programmer to escape from callback hell and promise chaining in asynchronous code, but they also make the code seemingly synchronous.
+    </script>
+</body>
+</html>
