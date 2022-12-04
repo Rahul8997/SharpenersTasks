@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My booking app</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h1>Appointment Booking App</h1>
+    <form action="#">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js"></script>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required />
+      <label for="email">Email ID:</label>
+      <input type="email" id="email" required />
+      <label for="phone">Phone Number:</label>
+      <input type="email" id="phone" required />
+      <input type="submit" id="submit" value="Submit" />
+    </form>
+    <ul id="listOfPeople"></ul>
+    <script>
+      const submitButton = document.getElementById("submit");
+
+      submitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        const emailId = document.getElementById("email").value;
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+
+        if (emailId.length > 0 && name.length > 0 && phone.length > 0) {
+          const object = {
+            name: name,
+            emailId: emailId, //unique
+            phoneNo: phone, //unique
+          };
+          //   localStorage.setItem("mailId:" + emailId, JSON.stringify(object));
+
+          axios.post("https://crudcrud.com/api/4d481a5339284e53aaa8b06236cf8988/appointmentdata", object)
+            .then(function (response) {
+              console.log(response);
+              addNewLineElement(response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+
+      });
+    //   Object.keys(localStorage).forEach((key) => {
+    //     stringifiedDetailsOfPeople = localStorage.getItem(key);
+    //     detailsOfPeople = JSON.parse(stringifiedDetailsOfPeople);
+
+    //     addNewLineElement(detailsOfPeople);
+    //   });
+
+    
+      function addNewLineElement(object) {
+        var ul = document.getElementById("listOfPeople");
+        var li = document.createElement("li");
+        li.appendChild(
+          document.createTextNode(
+            object.name + " " + object.emailId + " " + object.phone
+          )
+        );
+
+        var btn = document.createElement("button");
+        btn.style.cursor = "pointer";
+        btn.appendChild(document.createTextNode("DELETE"));
+        btn.setAttribute("id", `${object.emailId}`);
+        li.appendChild(btn);
+
+        var editBtn = document.createElement("button");
+        editBtn.style.margin = "5px 5px";
+        editBtn.style.cursor = "pointer";
+        editBtn.appendChild(document.createTextNode("EDIT"));
+        editBtn.setAttribute("id", `${object.emailId}`);
+        li.appendChild(editBtn);
+
+        ul.appendChild(li);
+
+        btn.addEventListener("click", () => {
+          console.log("clicked");
+          let par = btn.parentElement;
+          console.log(par);
+          par.style.display = "none";
+        //   localStorage.removeItem("mailId:" + object.emailId);
+        });
+      }
+    </script>
+  </body>
+</html>
