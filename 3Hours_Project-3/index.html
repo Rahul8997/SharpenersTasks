@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Foody buddy Restaurent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+    <form class="row gx-3 gy-2 align-items-center mx-5 my-5">
+        <div id="alert" class="alert alert-primary sm-3" role="alert" style="display:none">
+            Please fill all the data and then Submit
+        </div>
+        <div id="order" class="alert alert-success sm-3" role="alert" style="display:none">
+            Order has been served successfully
+        </div>
+        <div id="cancel" class="alert alert-danger sm-3" role="alert" style="display:none">
+            Order has Canceled successfully
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js"></script>
+        <form class="row gy-2 gx-3 align-items-center">
+
+            <div class="col-auto">
+                <div class="input-group">
+                    <div class="input-group-text">Choose Price:</div>
+                    <input type="text" class="form-control" id="price">
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="input-group">
+                    <div class="input-group-text">Choose Dish:</div>
+                    <input type="text" class="form-control" id="dish">
+                </div>
+            </div>
+            <div class="col-auto">
+                <label class="visually-hidden" for="catagory">Choose Table:</label>
+                <div class="input-group">
+                    <select class="form-select" id="table" aria-placeholder="choose a table">
+                        <option value="choose a table">Choose a table</option>
+                        <option value="Table 1">Table 1</option>
+                        <option value="Table 2">Table 2</option>
+                        <option value="Table 3">Table 3</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-auto">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary" id="onSubmit">Submit</button>
+            </div>
+
+        </form>
+        <h2>Orders</h2>
+        <h5 >Table 1 <em><ul id="Table1"></ul></em></h5>
+        <h5>Table 2 <em><ul id="Table2"></ul></em></h5>
+        <h5>Table 3 <em><ul id="Table3"></ul></em></h5>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+        <script src="/index.js"></script>
+</body>
+
+</html>
